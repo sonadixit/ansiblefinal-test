@@ -1,7 +1,0 @@
-
-- hosts: monitoring_servers
-  roles: 
-    - role: monitoring_setup.role
-   
-  
-
