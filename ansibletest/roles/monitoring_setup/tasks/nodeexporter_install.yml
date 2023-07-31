@@ -1,0 +1,57 @@
+    - name: Create user and group for Node Exporter
+      user:
+        name: "{{ node_exporter_user }}"
+        state: present
+        system: yes
+        shell: /bin/false
+
+    - name: Download Node Exporter binary
+      get_url:
+        url: "{{ node_exporter_download_url }}"
+        dest: "/tmp/node_exporter.tar.gz"
+
+    - name: Extract Node Exporter binary
+      unarchive:
+        src: "/tmp/node_exporter.tar.gz"
+        dest: "{{ node_exporter_install_dir }}"
+        remote_src: yes
+        owner: "{{ node_exporter_user }}"
+        group: "{{ node_exporter_group }}"
+        creates: "{{ node_exporter_install_dir }}/{{ node_exporter_binary }}"
+
+    - name: Create symlink to Node Exporter binary
+      file:
+        src: "{{ node_exporter_install_dir }}/{{ node_exporter_binary }}"
+        dest: "/usr/local/bin/node_exporter"
+        state: link
+        force: yes
+
+    - name: Create user and group for Node Exporter
+      user:
+        name: "{{ node_exporter_user }}"
+        state: present
+        system: yes
+        shell: /bin/false
+
+    - name: Set ownership of Node Exporter directories
+      file:
+        path: "{{ item }}"
+        owner: "{{ node_exporter_user }}"
+        group: "{{ node_exporter_group }}"
+        state: directory
+        recurse: yes
+      with_items:
+        - "{{ node_exporter_install_dir }}"
+        - "/etc/node_exporter"
+        - "/var/lib/node_exporter"
+
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+#    - name: Start Grafana service and enable it on boot
+ #     service:
+ #       name: node_exporter
+  #      state: started
+   #     enabled: yes
