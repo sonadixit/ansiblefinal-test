@@ -1,0 +1,25 @@
+---
+- name: Deploy Prometheus
+  include_tasks: prometheus_install.yml
+  tags:
+    - prometheus_install
+
+#- name: Deploy Grafana
+#  include_tasks: grafana_install.yml
+#  tags:
+#    - grafana_install
+
+#- name: Deploy Alertmanager
+#  include_tasks: alertmanager_install.yml
+#  tags:
+#   - alertmanager_install
+
+#- name: Deploy Nginx Reverse Proxy
+#  include_tasks: nginx_reverse_proxy_install.yml
+#  tags:
+#    - nginx_rv_install
+
+#- name: Deploy Node Exporter
+#  include_tasks: nodeexporter_install.yml
+#  tags:
+#    - node_exporter_install

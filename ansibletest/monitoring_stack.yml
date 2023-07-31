@@ -1,0 +1,7 @@
+
+- hosts: localhost
+  roles: 
+    - role: monitoring_setup
+   
+  
+

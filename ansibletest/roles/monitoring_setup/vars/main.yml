@@ -1,0 +1,26 @@
+
+grafana_version: "10.0.2"  # Replace with the desired Grafana version
+grafana_url: "https://dl.grafana.com/oss/release/grafana-{{ grafana_version }}.linux-amd64.tar.gz"
+grafana_install_dir: "/usr/local/bin"
+grafana_config_src: "./templates/grafana.ini.j2"  # Adjust the path and content based on your configuration
+grafana_config_dest: "/etc/grafana/grafana.ini"
+grafana_service_src: "./templates/grafana.service.j2"  # Adjust the path and content based on your service file
+grafana_service_dest: "/etc/systemd/system/grafana.service"
+grafana_service_name: "grafana.service"
+
+alertmanager_version: "0.22.2" 
+alertmanager_url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-amd64.tar.gz"
+alertmanager_install_dir: "/usr/local/bin"
+alertmanager_config_src: "./files/alertmanager.yml"  
+alertmanager_config_dest: "/etc/alertmanager/alertmanager.yml"
+alertmanager_service_src: "./templates/alertmanager.service.j2"  
+alertmanager_service_dest: "/etc/systemd/system/alertmanager.service"
+
+prometheus_dependencies: prometheus
+
+node_exporter_version: "1.6.1"  # Replace with a specific version if needed
+node_exporter_download_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz"
+node_exporter_install_dir: "/opt/node_exporter"
+node_exporter_binary: "node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter"
+node_exporter_user: "node_exporter"
+node_exporter_group: "node_exporter"
